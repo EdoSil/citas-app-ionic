@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cita del día</ion-title>
+
+    <!-- Botón configuración (rueda dentada) -->
+    <ion-buttons slot="end">
+      <ion-button routerLink="/configuraciones">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!--
+  Muestra la cita del día.
+  El botón de acción solo se presenta si la configuración del usuario
+  permite cambiar la cita en la pantalla de inicio.
+-->
+  
+  <app-tarjeta-cita
+    [cita]="citaActual"
+    [permitirEliminar]="permitirCambiarCita"
+    [textoBoton]="'Cambiar cita'"
+    [colorBoton]="'primary'"
+    (eliminar)="onCambiarCita()">
+  </app-tarjeta-cita>
+
+
+  <!-- Botón flotante para agregar citas -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/gestion-citas">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

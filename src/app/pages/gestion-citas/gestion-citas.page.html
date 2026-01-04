@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Flecha atrás -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Gestión de Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Formulario para agregar citas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nueva cita</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+    <!-- Campo FRASE -->
+    <ion-item>
+      <ion-input
+        label="Frase"
+        [(ngModel)]="nuevaCita.texto"
+        name="texto"
+        required
+        minlength="5"
+        #texto="ngModel">
+      </ion-input>
+    </ion-item>
+
+    <!-- Mensajes de error FRASE -->
+    <ion-text color="danger" *ngIf="texto.invalid && texto.touched">
+      <p *ngIf="texto.errors?.['required']">
+        La frase es obligatoria.
+      </p>
+      <p *ngIf="texto.errors?.['minlength']">
+        La frase debe tener al menos 5 caracteres.
+      </p>
+    </ion-text>
+
+    <!-- Campo AUTOR -->
+    <ion-item>
+      <ion-input
+        label="Autor"
+        [(ngModel)]="nuevaCita.autor"
+        name="autor"
+        required
+        minlength="2"
+        #autor="ngModel">
+      </ion-input>
+    </ion-item>
+    
+    <!-- Mensajes de error AUTOR -->
+    <ion-text color="danger" *ngIf="autor.invalid && autor.touched">
+      <p *ngIf="autor.errors?.['required']">
+        El autor es obligatorio.
+      </p>
+      <p *ngIf="autor.errors?.['minlength']">
+        El autor debe tener al menos 2 caracteres.
+      </p>
+    </ion-text>
+
+   <!-- Botón -->
+    <ion-button
+      expand="block"
+      (click)="agregarCita()"
+      [disabled]="texto.invalid || autor.invalid">
+      Agregar cita
+    </ion-button>
+    
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Listado de citas -->
+  <app-tarjeta-cita
+    *ngFor="let cita of citas"
+    [cita]="cita"
+    [permitirEliminar]="true"
+    textoBoton="Eliminar"
+    colorBoton="danger"
+    (eliminar)="eliminarCita(cita)">
+  </app-tarjeta-cita>
+
+</ion-content>
+

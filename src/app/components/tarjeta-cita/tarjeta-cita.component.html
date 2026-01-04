@@ -1,0 +1,33 @@
+<!-- Tarjeta que muestra una cita -->
+<!-- Se renderiza SOLO si existe una cita -->
+<ion-card *ngIf="cita">
+
+  <ion-card-content>
+
+    <!-- Texto de la cita -->
+    <p>
+      "{{ cita.texto }}"
+    </p>
+
+    <!-- Autor de la cita -->
+    <p>
+      <strong>- {{ cita.autor }}</strong>
+    </p>
+
+    <!-- 
+      Botón reutilizable:
+      - En Home: "Cambiar cita" (color azul)
+      - En Gestión: "Eliminar" (color rojo)
+      El color y el texto se controlan desde el componente padre
+    -->
+    <ion-button
+      *ngIf="permitirEliminar"
+      [color]="colorBoton"   
+      expand="block"
+      (click)="onEliminar()">
+      {{ textoBoton }}
+    </ion-button>
+
+  </ion-card-content>
+
+</ion-card>
